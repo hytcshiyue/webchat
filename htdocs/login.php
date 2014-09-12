@@ -7,9 +7,9 @@
 	<meta charset="utf-8">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="login.css">
-	<!-- // <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-	// <script type="text/javascript" src="js/index.js"></script>
-</head> -->
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	 <script type="text/javascript" src="js/index.js"></script>
+</head>
 <body>
 	<div id="login">
 		<span>用户登陆</span>

@@ -39,11 +39,29 @@
 	<meta charset="utf-8"/>
 	<title>web chat</title>
 	<link rel="stylesheet" type="text/css" href="login.css">
-	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
-  		<a href="login.php?logout=yes">logout</a>
+  		<a href="login.php?logout=yes">return</a>
+  		<ul id="Myinfo">
+  	<!-- 	<?php
+  			$db=new ezSQL_mysql();
+  			$res=$db->get_results("select * from userinfo where id=$curid");
+  			$MyHeadImage=$user->userHeadImage;
+  			$mynicheng=$user->userNickname;
+  			$myqianming=$user->myShuoshuo;
+  			echo "
+  				<div class='MyHeadImage'><img src='$MyHeadImage'/></div>
+  			    <div class='mYXinxi'>
+  					<p class='nicheng'>$mynicheng</p>
+  					<p class='qianming'>$myqianming</p>
+  				</div>
+  			";	
+  		?> -->
+  			
+  										  		
+  		</ul>
   		<ul id="friendslist">
   			<ul id="onlinefriendslist">
   				<?php
@@ -59,20 +77,20 @@
   							$curfriNickname=$friend->friendNoteName;
   							$curfrishuoshuo=$friend->friendShuoshuo;
   							if($curuserState=="online"){
-  								$onlineHtml.="<li class='friendli'>
+  								$onlineHtml.="<li friendid='$friend->id' friendNoteName='$friend->friendNoteName' class='friendli'>
   													<img src='$curHeadImageUrl' class='friHeadImge' />
   													<div class='Friendxinxi'>
-  										  				<p>$curfriNickname</p>
-  										  				<p>$curfrishuoshuo</p>
+  										  				<p class='nicheng'>$curfriNickname</p>
+  										  				<p class='qianming'>$curfrishuoshuo</p>
   													</div>
   								       		   </li>";
   								
   							}else{
-  								$offlineHtml.="<li class='friendli'>
+  								$offlineHtml.="<li friendid='$friend->id' friendNoteName='$friend->friendNoteName' class='friendli'>
   													<img src='$curHeadImageUrl' class='friHeadImge offlinePic' />
   													<div class='Friendxinxi'>
-  										  				<p>$curfriNickname</p>
-  										  				<p>$curfrishuoshuo</p>
+  										  				<p class='nicheng'>$curfriNickname</p>
+  										  				<p class='qianming'>$curfrishuoshuo</p>
   													</div>
   												</li>";
   							}
@@ -90,16 +108,24 @@
   		</ul>
   		<div id="chatContent">
   			<div class="chatname">
-  					<span class="cnName">啊呀</span>
+  					<span class="cnName"></span>
   					<a class="cnClose" href="#">关闭</a>
   			</div>
-  			<div class="chatcontent"></div>
+  			<div class="chatcontent">
+  				<div class="send">
+  					<div class="senderHeader"><img src="headimages/0.png"></div>
+  					<div class="senderLeft">
+  						<div class="senderLwords"></div>
+  					</div>
+  				</div>
+  			</div>
   			<div class="chatsend">
-  				<input class="csInput"/>
+  				<input class="csInput" maxlength="4000" type="text"/>
   				<button class="csBtn">
   					<span>Send</span>
   				</button>	
   			</div>
+  			<div class="info" curuserid="<?php echo $curid; ?>"></div>
   		</div>
 </body>
 </html>
