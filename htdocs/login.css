@@ -21,7 +21,8 @@ body{font-family: "MicroSoft Yahei";font-size: 13px;color: #111;}
 .Friendxinxi{width: 160px;float: right;}
 .Friendxinxi p{margin: 10px 0 15px 0;}
 /*弹出聊天窗口*/
-#chatContent{display:none; width: 650px;height: 500px;border-radius: 20px;border:1px solid #ccc;margin-top: 35px;margin-left: 350px;}
+#right{width: 800px; height: 650px; float: left; margin-top: 80px; }
+.chatContent{ width: 650px;height: 500px;border-radius: 20px;border:1px solid #ccc;margin-top: 35px;margin-left: 350px;}
 .chatname{width: 650px;height: 45px;background-color: #ccc;border-top-left-radius: 20px;border-top-right-radius: 20px;}
 .chatcontent{width: 650px;height: 410px;overflow:auto;}
 /*.tmp{height: 1000px;}*/

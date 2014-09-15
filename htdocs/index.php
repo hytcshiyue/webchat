@@ -1,6 +1,7 @@
 <?php 
 	include_once "include/ez_sql_core.php";
 	include_once "include/ez_sql_mysql.php";
+
 	session_start();
 	$userid = isset($_POST["userid"])?$_POST["userid"]:"" ;
 	$userpwd = isset($_POST["userpwd"])?$_POST["userpwd"]:"" ;
@@ -40,27 +41,26 @@
 	<title>web chat</title>
 	<link rel="stylesheet" type="text/css" href="login.css">
 	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
   		<a href="login.php?logout=yes">return</a>
-  		<ul id="Myinfo">
-  	<!-- 	<?php
+  		<ul id="Myinfo" curuserid="<?php echo  $curid; ?>">
+		<?php
   			$db=new ezSQL_mysql();
-  			$res=$db->get_results("select * from userinfo where id=$curid");
-  			$MyHeadImage=$user->userHeadImage;
-  			$mynicheng=$user->userNickname;
-  			$myqianming=$user->myShuoshuo;
+  			$res=$db->get_row("select * from userinfo where id=$curid");
+
+  			$MyHeadImage=$res->userHeadImage;
+  			$myshuoshuo=$res->myShuoshuo;
   			echo "
-  				<div class='MyHeadImage'><img src='$MyHeadImage'/></div>
+  				<div class='MyHeadImage'><img src='$MyHeadImage' curHeadImageUrl='".$MyHeadImage."' class='headImg' /></div>
   			    <div class='mYXinxi'>
-  					<p class='nicheng'>$mynicheng</p>
-  					<p class='qianming'>$myqianming</p>
+  					<p class='nicheng'>".$curnicheng."</p>
+  					<p class='qianming'>".$myshuoshuo."</p>
   				</div>
-  			";	
-  		?> -->
-  			
-  										  		
+  			"	
+  		?> 					  		
   		</ul>
   		<ul id="friendslist">
   			<ul id="onlinefriendslist">
@@ -71,33 +71,33 @@
   					$onlineHtml="";
   					$offlineHtml="";
   					if($res){
+  						// echo "<script>alert('d')</script>";
   						foreach ($res as $friend) {
   							$curHeadImageUrl = $friend->userHeadImage;
   							$curuserState=$friend->userState;
   							$curfriNickname=$friend->friendNoteName;
   							$curfrishuoshuo=$friend->friendShuoshuo;
   							if($curuserState=="online"){
-  								$onlineHtml.="<li friendid='$friend->id' friendNoteName='$friend->friendNoteName' class='friendli'>
+  								$onlineHtml.="<li talkid='$friend->id' talkname='$friend->friendNoteName' class='friendli'>
   													<img src='$curHeadImageUrl' class='friHeadImge' />
   													<div class='Friendxinxi'>
-  										  				<p class='nicheng'>$curfriNickname</p>
-  										  				<p class='qianming'>$curfrishuoshuo</p>
+  										  				<p class='nicheng'>".$curfriNickname."</p>
+  										  				<p class='qianming'>".$curfrishuoshuo."</p>
   													</div>
   								       		   </li>";
   								
   							}else{
-  								$offlineHtml.="<li friendid='$friend->id' friendNoteName='$friend->friendNoteName' class='friendli'>
+  								$offlineHtml.="<li talkid='$friend->id' talkname='$friend->friendNoteName' class='friendli'>
   													<img src='$curHeadImageUrl' class='friHeadImge offlinePic' />
   													<div class='Friendxinxi'>
-  										  				<p class='nicheng'>$curfriNickname</p>
-  										  				<p class='qianming'>$curfrishuoshuo</p>
+  										  				<p class='nicheng'>".$curfriNickname."</p>
+  										  				<p class='qianming'>".$curfrishuoshuo."</p>
   													</div>
   												</li>";
   							}
-  						}
+  						}echo $onlineHtml;
   					}
-  					echo $onlineHtml;
-  				
+  					
   				?>
   			</ul>
   			<ul id="offlinefriendslist">
@@ -106,14 +106,16 @@
   				?>
   			</ul>
   		</ul>
-  		<div id="chatContent">
+  		<div id="right">
+  		 <!-- <div class="chatContent">
   			<div class="chatname">
   					<span class="cnName"></span>
   					<a class="cnClose" href="#">关闭</a>
   			</div>
   			<div class="chatcontent">
   				<div class="send">
-  					<div class="senderHeader"><img src="headimages/0.png"></div>
+  					<div class="senderHeader">
+  					</div>
   					<div class="senderLeft">
   						<div class="senderLwords"></div>
   					</div>
@@ -126,6 +128,7 @@
   				</button>	
   			</div>
   			<div class="info" curuserid="<?php echo $curid; ?>"></div>
+  		 </div> -->
   		</div>
 </body>
 </html>

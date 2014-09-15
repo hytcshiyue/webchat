@@ -10,7 +10,11 @@
 		$receiverid = isset($_POST["receiverid"])?$_POST["receiverid"]:"";
 
 		$db=new ezSQL_mysql();
-
+		// $curUserID=isset($_SESSION["wodeid"])?$_SESSION["wodeid"]:"";
+		// if($curUserID==""){
+		// 	echo 'need login';
+		// 	die();
+		// }
 		if($flag=="sendMsg"){
 				$sql="insert into messageinfo(id,msgContent,msgSender,msgReceiver,msgSendTime,msgState)";
 				$sql.="values(null,'$msg',$senderid,$receiverid,now(),'unread')";
@@ -22,5 +26,16 @@
 				}
 				die();
 			}
+			// if($flag=="getUnreadMsg"){
+			// 	if($curUserID!=""){
+			// 		echo "neeed login";
+			// 		die();
+			// 	}
+			// 	$sql = "select * from messageinfo where msgReceiver=$curUserID and msgState='unread' ";
+			// 	$res = $db->get_result($sql);
+
+			// 	echo json_encode($res);
+				
+			// }
 		
 ?>
