@@ -4,44 +4,80 @@ function tiao(){
 }
 
 $(function(){
+	
 	chathtml();
 	iniDelegate();
-	// setInterval('getUnreadMsg()',1000);
-	getUnreadMsg();
+
+ setInterval('getUnreadMsg()',1000);
+	
+// getUnreadMsg();
+
 	
 });
-//获取自己的所有未读消息
-// function getUnreadMsg(){
-// 		$ajax({
-// 			type:"POST",
-// 			url:"include/ajax.php",
-// 			data:{flag:'getUnreadMsg'},
-// 			success:function(res){
-// 				var objs=eval("("+res+")");
-// 				$.each(objs,function(){
-// 					alert(this.msgContent);
-// 				});
 
-// 			}
-// 		});
-// }
+//获取自己的所有未读消息
+function getUnreadMsg(){
+		 var msgSenderidArr=new Array();
+		$.ajax({
+			type:"POST",
+			url:"include/ajax.php",
+			async:false,
+			data:{flag:'getUnreadMsg'},
+			success:function(res){
+
+				var objs=eval("("+res+")");
+
+				$.each(objs,function(){
+					//alert(this.msgContent);
+					var msgContent=this.msgContent;
+					var msgSender=this.msgSender;
+
+					var isshow=$("#friendlitalk"+msgSender).attr("isshow");
+					var friendImg=$("#friendlitalk"+msgSender).attr("friendImg");
+					//alert(isshow);
+					if(isshow=="yes"){
+						msgSenderidArr.push(this.msgSender);
+						msgSenderid=this.msgSender;
+						var receivermsghtml='';
+						receivermsghtml +='	<div class="sendRe">';
+						receivermsghtml +='		<div class="senderHeaderRe"><img src=" '+friendImg+' " class="headImage"  /></div>';
+						receivermsghtml +='       <div class="senderLeftRe">';
+						receivermsghtml +='		   <div class="senderLwordsRe">'+ msgContent+'</div>';
+						receivermsghtml +='	    </div>';
+						receivermsghtml +='	</div>';
+						  $("#talk"+msgSender).find(".chatcontentA").append(receivermsghtml);
+					}
+				});
+				if(msgSenderidArr.length != 0){
+	
+		 			$.ajax({
+								type:"POST",
+								url:"include/ajax.php",
+								data:{flag:'changeMsgState',msgSender:msgSenderid},
+								success:function(res){
+								}
+							});
+		 		}
+			}
+		});
+}
 function chathtml(){
 	
 	
-	$(".friendli").click(function(){
-		alert ("sdv");
+	$("#friendslist li").click(function(){
+		
 		var talkid=$(this).attr("talkid");
 		var talkname=$(this).attr("talkname");
 		var isshow=$(this).attr("isshow");
 		var isappear=$(this).attr("isappear");
 		
-		if(isshow="no"){
+		if(isshow=="no"){
 			$(this).attr("isshow","yes");
-			if(isappear="no"){
+			if(isappear=="no"){
 				var chathtmlB='';
-					chathtmlB +='<div id="'+talkid+'" class="chatContent">';
+					chathtmlB +='<div id="talk'+talkid+'" class="chatContent">';
 					chathtmlB +='   <div class="chatname"><span class="cnName">与   '+talkname+'  聊天中</span><a class="cnClose" href="#">关闭</a></div>';
-					chathtmlB +='   <div class="chatcontent">';
+					chathtmlB +='   <div class="chatcontentA">';
 					chathtmlB +='   </div>';
 					chathtmlB +='   <div class="chatsend">';
 					chathtmlB +='   	<input class="csInput" maxlength="4000" type="text"/>';
@@ -54,23 +90,28 @@ function chathtml(){
 					$(this).attr("isappear","yes");
 			}
 			else{	
-				$("#"+talkid).show();
+				$("#talk"+talkid).show();
 			}	
 		}
 		$(".chatContent").css("z-index","1");
-		$("#"+talkid).css("z-index","22");
+		$("#talk"+talkid).css("z-index","22");
 		$(".cnClose").click(function(){
 			var talkidN = $(this).parent().parent().attr("id");
 			$(".friendli[talkid='"+talkidN+"']").attr("isshow","no");
-			$("#"+talkid).hide();
+			$(this).parent().parent().hide();
 			
 		});
 
-		$("#"+talkid).draggable({ 
-			handle: ".talkboxtitle" ,
+		$("#talk"+talkid).draggable({ 
+			handle: ".chatname" ,
 			containment: "parent"
 		});
+		$(".chatContent").click(function(){
+			$(".chatContent").css("z-index","10");
+			$(this).css("z-index","12");
+		});
 	});
+
 }
 
 function iniDelegate(){
@@ -89,15 +130,16 @@ function iniDelegate(){
 	// 	$(".cnName").html("与    "+friendNotename+"    聊天中");
 	// 	$(".csBtn").attr("friendli",friendid);
 	// });
-	$(".csBtn").click(function(){
-		var msg =$(".csInput").val();
+	$(document).on("click",".csBtn",function(){
+		
+		var msg =$(this).prev(".csInput").val();
 		if(msg==""){
 			return;
 		}
 		
 		//通过ajax,将消息插入数据库的表中,并显示在对话框中
-		var receiverid= $(this).attr("friendid");
-		var senderid=$(".info").attr("curuserid");
+		var receiverid= $(this).attr("talkid");
+		var senderid=$("#Myinfo").attr("curuserid");
 		$.ajax({
 			type:"POST",
 			url:"include/ajax.php",
@@ -118,13 +160,10 @@ function iniDelegate(){
 			    chathtmlA +='	    </div>';
 			    chathtmlA +='	</div>';
 			    
-			$(this).parent().prev(".chatcontent").append(chathtmlA);
+			$(this).parent().prev(".chatcontentA").append(chathtmlA);
 
 	});
-	// 关闭对话框
-	$(".cnClose").click(function(){
-		$(this).parent().parent().hide();
-		$(".friendli").attr("istalking","no");
-	});
+	
+
 }
 

@@ -3,37 +3,46 @@ li,ul{list-style: none;}
 body{font-family: "MicroSoft Yahei";font-size: 13px;color: #111;}
 /*登陆界面*/
 #login{width: 300px;height: 250px;border: 1px solid #ccc;text-align: center;border-radius: 5px;margin: 40px auto; padding-top:30px;font-weight: bold;color: #111;font-size: 18px;}
+
 #txtUserid,#txtUserPwd{margin-top: 20px;margin-bottom: 20px;outline: none; }
 #log-sub{width: 60px;height: 30px;/*float: right;margin-right: 40px;*/margin-top: 20px;}
 
 /*webchat界面*/
+#left{float: left;height: 600px;width: 300px;}
 #Myinfo{height: 80px;float: left;position: absolute;left: 0;top:50px;margin-left: 30px;width: 250px;；}
 .MyHeadImage{width: 60px;height:60px;padding: 10px;float: left;background-image: url("");}
 .MyHeadImage img{width: 60px;height: 60px;}
 .mYXinxi{width: 160px;float: right;}
 .mYXinxi p{margin: 10px 0 15px 0;}
-.nicheng{font-weight: bold;font-size: 14px;}
-.qianming{font-size: 12px;color: #aaa;}
-#friendslist{width: 250px;height:400px;position: absolute;left: 0;top:150px;border:1px solid #ccc;border-radius: 15px;margin-left: 15px;}
-.firendli{height: 80px;float: left;}
-.friHeadImge{width: 60px;height:60px;padding: 10px;background-image: url("");}
+.nicheng{font-weight: bold;font-size: 15px;}
+.qianming{font-size: 12px;color: #aaa;margin-top: 15px;}
+#friendslist{width: 250px;height:400px;position: absolute;left: 0;top:150px;border:1px solid #ccc;margin-left: 15px;border-radius: 15px;}
+.friendli{border-bottom: 1px solid #ddd;margin-bottom: 2px;margin-top:3px;}
+.friHeadImge{width: 60px;height:60px;background-image: url("");margin-left: 5px;margin: 10px 10px;}
 .friHeadImge img{width: 60px;height: 60px;}
-.Friendxinxi{width: 160px;float: right;}
-.Friendxinxi p{margin: 10px 0 15px 0;}
+.Friendxinxi{width: 150px;float: right;margin-left:10px;}
+.friendstate{margin-left: 5px;}
+.FriendXX{margin-top: 10px;}
+.offlinePic{background-color: #ccc; opacity: 0.5;}
 /*弹出聊天窗口*/
-#right{width: 800px; height: 650px; float: left; margin-top: 80px; }
-.chatContent{ width: 650px;height: 500px;border-radius: 20px;border:1px solid #ccc;margin-top: 35px;margin-left: 350px;}
+#right{width: 1000px; height: 600px; float: left; margin-top: 80px; position: relative;}
+.chatContent{ width: 650px;height:500px;border-radius: 20px;top: 60px; left: 80px;border:1px solid #ccc;background-color: #fff;  position: absolute;}
 .chatname{width: 650px;height: 45px;background-color: #ccc;border-top-left-radius: 20px;border-top-right-radius: 20px;}
-.chatcontent{width: 650px;height: 410px;overflow:auto;}
+.chatcontentA{width: 650px;height: 410px;/*position: absolute;top:80px;left: 80px;*/}
 /*.tmp{height: 1000px;}*/
-.send{width:600px;min-height: 40px;height: auto;float: right;padding: 10px; }
+.send{width:600px;min-height: 40px;height: auto;float: left;padding: 10px; }
 .senderHeader{width: 50px;height:50px;float: right;}
 .senderHeader img{width: 50px;height: 50px;border-radius: 100px;}
 .senderLeft{width: 550px;float: right;}
-.senderLwords{height: 30px; max-width: 300px;margin-right: 10px;margin-top: 10px;line-height: 22px;padding: 0 15px; float: right;border:1px solid #000;border-radius: 6px;}
+.senderLwords{height: 30px; max-width: 300px;margin-right: 10px;margin-top: 10px;line-height: 22px;padding: 0 15px; float: right;border:2px solid #ccc;border-radius: 6px;padding-top: 5px;}
 .chatsend{width: 650px;height: 45px;background-color: #ccc;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px; }
 .cnName{float: left;width: 500px;height: 19px;padding: 13px 13px 13px 13px;text-align: center;color: #111;font-size: 18px;font-weight: bold;}
 .cnClose{width: 60px;height: 19px;margin: 5px 10px 7px 0;padding: 6px 10px 6px 10px;float: right;font-size: 14px;font-family: "微软雅黑";text-align: center;display: block;border: 1px solid #ccc;border-radius: 3px;text-decoration: none;color: #FFF;cursor: pointer;background-color: grey;}
-.csInput{outline: none;display: block;width: 500px;height: 20px;border-radius: 5px;padding: 5px 10px 5px 10px;margin: 5px 10px 5px 6px;float: left;background: none repeat scroll 0% 0% #F9F9F9;font-family: "微软雅黑","Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 16px;}
+.csInput{outline: none;display: block;width: 500px;height: 30px;border-radius: 5px;padding: 5px 10px 5px 10px;margin: 5px 10px 5px 6px;float: left;background: none repeat scroll 0% 0% #F9F9F9;font-family: "微软雅黑","Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 16px;}
 .csBtn{cursor: pointer;padding: 3px 10px 3px 10px;border-radius: 5px;border: 1px solid #111;float: left;margin: 10px 15px;}
-.info{display: none;}
+/*.sendRe{ width:600px;min-height: 40px;height: auto;float: left;padding: 10px; }
+.senderHeaderRe{width: 50px;height:50px;float:left;}
+.senderHeaderRe img{width: 50px;height: 50px;border-radius: 100px;}
+.senderLeftRe{width: 550px;float: left;}
+.senderLwordsRe{height: 30px; max-width: 300px;margin-left: 10px;margin-top: 10px;line-height: 22px;padding: 0 15px; float: left;border:2px solid #ccc;border-radius: 6px;padding-top: 5px;}*/
+

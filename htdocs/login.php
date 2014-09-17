@@ -27,8 +27,8 @@
 		echo "<script>tiao();</script>";
 	}
 	if($logout=="yes"){
-		unset($_SESSION["wodeid"]);
-		unset($_SESSION["wodenicheng"]);
+		 unset($_SESSION["wodeid"]);
+		 unset($_SESSION["wodenicheng"]);
 	}
 ?>
 </body>

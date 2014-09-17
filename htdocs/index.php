@@ -16,14 +16,15 @@
 		}
 		else{
 			//将当前成功登陆的人的消息  写入到session中
-			$_SESSOIN["wodeid"]=$userid;
-			$_SESSOIN["wodenicheng"]=$res->userNickname;
-			//echo "success to login! welcome " . $res->userNickname;
+			$_SESSION["wodeid"]=$userid;
+			$_SESSION["wodenicheng"]=$res->userNickname;
+
+			//echo "success to login! welcome " . $_SESSION["wodeid"];
 		}
 	} 
 
-	$curid = isset($_SESSOIN["wodeid"])?$_SESSOIN["wodeid"]:"" ;
-	$curnicheng = isset($_SESSOIN["wodenicheng"])?$_SESSOIN["wodenicheng"]:"" ;
+	$curid = isset($_SESSION["wodeid"])?$_SESSION["wodeid"]:"" ;
+	$curnicheng = isset($_SESSION["wodenicheng"])?$_SESSION["wodenicheng"]:"" ;
 	if($curid==""){
 		header("location:login.php?error=needlogin");
 		die();
@@ -45,9 +46,10 @@
 	<script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
-  		<a href="login.php?logout=yes">return</a>
-  		<ul id="Myinfo" curuserid="<?php echo  $curid; ?>">
-		<?php
+		<div id="left">
+  			<a href="login.php?logout=yes">return</a>
+  			<ul id="Myinfo" curuserid="<?php echo  $curid; ?>">
+				<?php
   			$db=new ezSQL_mysql();
   			$res=$db->get_row("select * from userinfo where id=$curid");
 
@@ -60,38 +62,45 @@
   					<p class='qianming'>".$myshuoshuo."</p>
   				</div>
   			"	
-  		?> 					  		
-  		</ul>
-  		<ul id="friendslist">
+  				?> 					  		
+  			</ul>
+  			<ul id="friendslist">
   			<ul id="onlinefriendslist">
   				<?php
   					// echo $curid;
   					$db=new ezSQL_mysql();
-  					$res=$db->get_results("select userinfo.id,userinfo.userNickname,userinfo.userHeadImage,friendsinfo.friendNoteName,friendsinfo.friendShuoshuo,userinfo.userState from userinfo,friendsinfo where userinfo.id=friendsinfo.friendid and friendsinfo.userid=$curid ");
+  					$res=$db->get_results("select userinfo.id,userinfo.userNickname,userinfo.userHeadImage,friendsinfo.friendNoteName,friendsinfo.friendid, friendsinfo.friendShuoshuo,userinfo.userState from userinfo,friendsinfo where userinfo.id=friendsinfo.friendid and friendsinfo.userid=$curid ");
   					$onlineHtml="";
   					$offlineHtml="";
   					if($res){
   						// echo "<script>alert('d')</script>";
   						foreach ($res as $friend) {
+  							$curid = $friend ->friendid;
   							$curHeadImageUrl = $friend->userHeadImage;
   							$curuserState=$friend->userState;
   							$curfriNickname=$friend->friendNoteName;
   							$curfrishuoshuo=$friend->friendShuoshuo;
   							if($curuserState=="online"){
-  								$onlineHtml.="<li talkid='$friend->id' talkname='$friend->friendNoteName' class='friendli'>
+  								$onlineHtml.="<li id='friendlitalk$curid' talkid='talk$curid' talkname='$curfriNickname' class='friendli' isshow='no' isappear='no'>
   													<img src='$curHeadImageUrl' class='friHeadImge' />
   													<div class='Friendxinxi'>
-  										  				<p class='nicheng'>".$curfriNickname."</p>
+                                <div class='FriendXX'>
+                                  <span class='nicheng'>".$curfriNickname."</span>
+                                  <span class='friendstate'>[  ".$curuserState."   ]</span>
+                                </div>
   										  				<p class='qianming'>".$curfrishuoshuo."</p>
   													</div>
   								       		   </li>";
   								
   							}else{
-  								$offlineHtml.="<li talkid='$friend->id' talkname='$friend->friendNoteName' class='friendli'>
+  								$offlineHtml.="<li id='friendlitalk$curid' talkid='talk$curid' talkname='$curfriNickname' class='friendli' isshow='no' isappear='no'>
   													<img src='$curHeadImageUrl' class='friHeadImge offlinePic' />
   													<div class='Friendxinxi'>
-  										  				<p class='nicheng'>".$curfriNickname."</p>
-  										  				<p class='qianming'>".$curfrishuoshuo."</p>
+  										  				<div class='FriendXX'>
+                                  <span class='nicheng'>".$curfriNickname."</span>
+                                  <span class='friendstate'>[  ".$curuserState."   ]</span>
+                                </div>
+  										  				  <p class='qianming'>".$curfrishuoshuo."</p>
   													</div>
   												</li>";
   							}
@@ -105,30 +114,10 @@
   					echo $offlineHtml;
   				?>
   			</ul>
-  		</ul>
+  			</ul>
+		</div>
   		<div id="right">
-  		 <!-- <div class="chatContent">
-  			<div class="chatname">
-  					<span class="cnName"></span>
-  					<a class="cnClose" href="#">关闭</a>
-  			</div>
-  			<div class="chatcontent">
-  				<div class="send">
-  					<div class="senderHeader">
-  					</div>
-  					<div class="senderLeft">
-  						<div class="senderLwords"></div>
-  					</div>
-  				</div>
-  			</div>
-  			<div class="chatsend">
-  				<input class="csInput" maxlength="4000" type="text"/>
-  				<button class="csBtn">
-  					<span>Send</span>
-  				</button>	
-  			</div>
-  			<div class="info" curuserid="<?php echo $curid; ?>"></div>
-  		 </div> -->
+  		
   		</div>
 </body>
 </html>
