@@ -4,24 +4,70 @@ function tiao(){
 }
 
 $(function(){
-	
+	$(".xinxiA").hover(function(){
+		$(this).find(".xiugai").show();
+	},
+	function(){
+		$(this).find(".xiugai").hide();
+	}
+	);
 	chathtml();
 	iniDelegate();
-
+	changeMyinfo();
  setInterval('getUnreadMsg()',1000);
 	
 // getUnreadMsg();
+login();
+logout();
 
-	
 });
+//好友上下线
+function login(){
+	$.ajax({
+		type:"POST",
+		url:"include/ajax.php",
+		data:{flag:'login'},
+		success:function(res){
+		}
+	});
+}
+function logout(){
+	$.ajax({
+		type:"POST",
+		url:"include/ajax.php",
+		data:{flag:'logout'},
+		success:function(res){
 
+		}
+	});
+}
+//修改个人信息
+	function changeMyinfo(){
+	$(document).on("click",".xiugai",function(){
+		var chathtmlC="";
+		chathtmlC+='<div class="xingaiA">';
+		chathtmlC+='<div class="xiugaiATop">修改个人信息</div>';
+		chathtmlC+='<div class="xiugaiARight">';
+		chathtmlC+=' <p>昵  称：<input type="text" class="change-nicheng" /> </p>';
+		chathtmlC+='<p>说  说：<input type="text" class="change-shuoshuo" /></p>';
+		chathtmlC+='</div>';
+		chathtmlC+='<div class='xiugaiALeft'>';
+		chathtmlC+='<img src='$MyHeadImage' curHeadImageUrl='".$MyHeadImage."' class='change-headImg' />';
+		chathtmlC+='</div>';
+		chathtmlC+='</div>';
+
+		chathtmlC+='';
+		
+	});	
+		
+	}
 //获取自己的所有未读消息
 function getUnreadMsg(){
 		 var msgSenderidArr=new Array();
 		$.ajax({
 			type:"POST",
 			url:"include/ajax.php",
-			async:false,
+			// async:false,
 			data:{flag:'getUnreadMsg'},
 			success:function(res){
 
@@ -38,16 +84,15 @@ function getUnreadMsg(){
 					if(isshow=="yes"){
 						msgSenderidArr.push(this.msgSender);
 						msgSenderid=this.msgSender;
-						var receivermsghtml='';
-						receivermsghtml +='	<div class="sendRe">';
-						receivermsghtml +='		<div class="senderHeaderRe"><img src=" '+friendImg+' " class="headImage"  /></div>';
-						receivermsghtml +='       <div class="senderLeftRe">';
-						receivermsghtml +='		   <div class="senderLwordsRe">'+ msgContent+'</div>';
-						receivermsghtml +='	    </div>';
-						receivermsghtml +='	</div>';
-						  $("#talk"+msgSender).find(".chatcontentA").append(receivermsghtml);
+						var receivemsghtmlA='';
+						receivemsghtmlA +='	<div class="onetalkboxS">';
+						receivemsghtmlA +='		<div class="headImageS"><img src="'+friendImg+'" class="HeadImge"  /></div>';
+						receivemsghtmlA +='		<div class="onetalkS">'+msgContent+'</div>';
+						receivemsghtmlA +='	</div>';
+
+						  $("#talk"+msgSender).find(".chatcontentA").append(receivemsghtmlA);
 					}
-				});
+				}); 
 				if(msgSenderidArr.length != 0){
 	
 		 			$.ajax({
@@ -61,12 +106,14 @@ function getUnreadMsg(){
 			}
 		});
 }
+// 显示聊天窗口
 function chathtml(){
 	
 	
 	$("#friendslist li").click(function(){
 		
 		var talkid=$(this).attr("talkid");
+		//alert(talkid);
 		var talkname=$(this).attr("talkname");
 		var isshow=$(this).attr("isshow");
 		var isappear=$(this).attr("isappear");
@@ -81,7 +128,7 @@ function chathtml(){
 					chathtmlB +='   </div>';
 					chathtmlB +='   <div class="chatsend">';
 					chathtmlB +='   	<input class="csInput" maxlength="4000" type="text"/>';
-					chathtmlB +='       <button class="csBtn"><span>Send</span></button>';
+					chathtmlB +='       <button class="csBtn" talkid="'+talkid+'"><span>Send</span></button>';
 					chathtmlB +='   </div>';
 					chathtmlB +='</div>';
 					chathtmlB +='';
@@ -97,7 +144,8 @@ function chathtml(){
 		$("#talk"+talkid).css("z-index","22");
 		$(".cnClose").click(function(){
 			var talkidN = $(this).parent().parent().attr("id");
-			$(".friendli[talkid='"+talkidN+"']").attr("isshow","no");
+			//alert(talkidN);
+			$("#friendli"+talkidN).attr("isshow","no");
 			$(this).parent().parent().hide();
 			
 		});
@@ -113,7 +161,7 @@ function chathtml(){
 	});
 
 }
-
+//发送信息
 function iniDelegate(){
 	// $(".friendli").click(function(){
 	// 	var istalking=$(this).attr("istalking");
@@ -130,6 +178,8 @@ function iniDelegate(){
 	// 	$(".cnName").html("与    "+friendNotename+"    聊天中");
 	// 	$(".csBtn").attr("friendli",friendid);
 	// });
+
+	//发送信息
 	$(document).on("click",".csBtn",function(){
 		
 		var msg =$(this).prev(".csInput").val();
@@ -143,7 +193,7 @@ function iniDelegate(){
 		$.ajax({
 			type:"POST",
 			url:"include/ajax.php",
-			data:{flag:'sendMsg',msg:msg,senderid:senderid,receiverid:senderid},
+			data:{flag:'sendMsg',msg:msg,senderid:senderid,receiverid:receiverid},
 			success:function(res){
 				alert(res);
 			}
@@ -163,7 +213,12 @@ function iniDelegate(){
 			$(this).parent().prev(".chatcontentA").append(chathtmlA);
 
 	});
+
+	$(document).on("click",".xiugai",function(){
+		$(this).find(".xiugai").show();
+	});
 	
 
 }
+
 

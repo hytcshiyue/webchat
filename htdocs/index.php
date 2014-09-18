@@ -57,9 +57,12 @@
   			$myshuoshuo=$res->myShuoshuo;
   			echo "
   				<div class='MyHeadImage'><img src='$MyHeadImage' curHeadImageUrl='".$MyHeadImage."' class='headImg' /></div>
-  			    <div class='mYXinxi'>
-  					<p class='nicheng'>".$curnicheng."</p>
-  					<p class='qianming'>".$myshuoshuo."</p>
+  			  <div class='mYXinxi'>
+  					 <p class='nicheng'>".$curnicheng."</p>
+             <div class='xinxiA'>  
+                <span class='qianming'>".$myshuoshuo."</span>
+                <i class='xiugai'>修改</i>
+            </div>
   				</div>
   			"	
   				?> 					  		
@@ -81,7 +84,7 @@
   							$curfriNickname=$friend->friendNoteName;
   							$curfrishuoshuo=$friend->friendShuoshuo;
   							if($curuserState=="online"){
-  								$onlineHtml.="<li id='friendlitalk$curid' talkid='talk$curid' talkname='$curfriNickname' class='friendli' isshow='no' isappear='no'>
+  								$onlineHtml.="<li id='friendlitalk$curid' talkid='$curid' talkname='$curfriNickname' class='friendli' isshow='no' isappear='no' friendImg='".$curHeadImageUrl."'>
   													<img src='$curHeadImageUrl' class='friHeadImge' />
   													<div class='Friendxinxi'>
                                 <div class='FriendXX'>
@@ -93,7 +96,7 @@
   								       		   </li>";
   								
   							}else{
-  								$offlineHtml.="<li id='friendlitalk$curid' talkid='talk$curid' talkname='$curfriNickname' class='friendli' isshow='no' isappear='no'>
+  								$offlineHtml.="<li id='friendlitalk$curid' talkid='$curid' talkname='$curfriNickname' class='friendli' isshow='no' isappear='no' friendImg='".$curHeadImageUrl."'>
   													<img src='$curHeadImageUrl' class='friHeadImge offlinePic' />
   													<div class='Friendxinxi'>
   										  				<div class='FriendXX'>

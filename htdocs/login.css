@@ -16,14 +16,22 @@ body{font-family: "MicroSoft Yahei";font-size: 13px;color: #111;}
 .mYXinxi p{margin: 10px 0 15px 0;}
 .nicheng{font-weight: bold;font-size: 15px;}
 .qianming{font-size: 12px;color: #aaa;margin-top: 15px;}
+.xiugai{margin-left:30px;cursor: pointer;position: relative;}
+.xiugai:hover{text-decoration: underline;}
 #friendslist{width: 250px;height:400px;position: absolute;left: 0;top:150px;border:1px solid #ccc;margin-left: 15px;border-radius: 15px;}
 .friendli{border-bottom: 1px solid #ddd;margin-bottom: 2px;margin-top:3px;}
 .friHeadImge{width: 60px;height:60px;background-image: url("");margin-left: 5px;margin: 10px 10px;}
+.change-headImg{width: 80px;height: 80px;margin:60px 0 0 10px;}
 .friHeadImge img{width: 60px;height: 60px;}
 .Friendxinxi{width: 150px;float: right;margin-left:10px;}
 .friendstate{margin-left: 5px;}
 .FriendXX{margin-top: 10px;}
 .offlinePic{background-color: #ccc; opacity: 0.5;}
+/*修改个人信息*/
+.xingaiA{width: 400px;height: 300px;border:1px solid #ccc;position: absolute;left: 400px;}
+.xiugaiATop{width: 400px;height: 30px;background-color:#ccc;text-align: center;font-size: 15px;line-height: 20px;font-weight: bold;padding: 10px 0 8px 0; }
+.xiugaiARight{float: right;width: 300px;height:250px;}
+.xiugaiALeft{float: left;width: 100px;height: 250px;}
 /*弹出聊天窗口*/
 #right{width: 1000px; height: 600px; float: left; margin-top: 80px; position: relative;}
 .chatContent{ width: 650px;height:500px;border-radius: 20px;top: 60px; left: 80px;border:1px solid #ccc;background-color: #fff;  position: absolute;}
@@ -38,11 +46,11 @@ body{font-family: "MicroSoft Yahei";font-size: 13px;color: #111;}
 .chatsend{width: 650px;height: 45px;background-color: #ccc;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px; }
 .cnName{float: left;width: 500px;height: 19px;padding: 13px 13px 13px 13px;text-align: center;color: #111;font-size: 18px;font-weight: bold;}
 .cnClose{width: 60px;height: 19px;margin: 5px 10px 7px 0;padding: 6px 10px 6px 10px;float: right;font-size: 14px;font-family: "微软雅黑";text-align: center;display: block;border: 1px solid #ccc;border-radius: 3px;text-decoration: none;color: #FFF;cursor: pointer;background-color: grey;}
-.csInput{outline: none;display: block;width: 500px;height: 30px;border-radius: 5px;padding: 5px 10px 5px 10px;margin: 5px 10px 5px 6px;float: left;background: none repeat scroll 0% 0% #F9F9F9;font-family: "微软雅黑","Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 16px;}
+.csInput{outline: none;display: block;width: 500px;height: 20px;border-radius: 5px;padding: 5px 10px 5px 10px;margin: 5px 10px 5px 6px;float: left;background: none repeat scroll 0% 0% #F9F9F9;font-family: "微软雅黑","Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 16px;}
 .csBtn{cursor: pointer;padding: 3px 10px 3px 10px;border-radius: 5px;border: 1px solid #111;float: left;margin: 10px 15px;}
-/*.sendRe{ width:600px;min-height: 40px;height: auto;float: left;padding: 10px; }
-.senderHeaderRe{width: 50px;height:50px;float:left;}
-.senderHeaderRe img{width: 50px;height: 50px;border-radius: 100px;}
-.senderLeftRe{width: 550px;float: left;}
-.senderLwordsRe{height: 30px; max-width: 300px;margin-left: 10px;margin-top: 10px;line-height: 22px;padding: 0 15px; float: left;border:2px solid #ccc;border-radius: 6px;padding-top: 5px;}*/
+
+.onetalkboxS{ width:600px;min-height: 40px;height: auto;float: left;padding: 10px;}
+.onetalkS{height: 30px; max-width: 300px;margin-top: 10px;line-height: 22px;padding: 0 15px; float:left;border:2px solid #ccc;border-radius: 6px;padding-top: 5px;margin-left: 10px;}
+.headImageS{ width: 50px;height: 50px;border-radius: 100px;float: left;}
+.headImageS img{width: 50px;height: 50px;border-radius: 100px;}
 

@@ -47,5 +47,15 @@
 					}
 					die();
 			}
+			if($flag=="login"){
+				$sql="update userinfo set userState='online'  where id=$curUserID" ;
+				echo "$curUserID";
+				$res =$db->get_results($sql);
+			}
+			if($flag=="logout"){
+				$sql="update userinfo set userState='offline'  where id=$curUserid" ;
+				// echo "$curUserid";
+				$res =$db->get_results($sql);
+			}
 		
 ?>
